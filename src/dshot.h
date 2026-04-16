@@ -7,18 +7,28 @@
  * 
  * @author WilliTourt willitourt@foxmail.com
  * @version 1.0
- * @date 2026.04.10
+ * @date 2026.04.16
  * 
  * @note Adapted from mokhwasomssi/stm32_hal_dshot on GitHub
  * 
  * @changelog:
  * - 2026.04.10: Initial release, not tested yet.
+ * - 2026.04.16: Added FreeRTOS support for non-blocking delays, and has tested
+ *               successfully on an STM32F4 board with a DShot600 ESC.
  * 
  */
 
 
 #include "tim.h"
 #include <cmath>
+
+#define DSHOT_USE_FREERTOS true // Set to 1 to enable FreeRTOS delays, 0 for HAL_Delay (blocking)
+
+#if DSHOT_USE_FREERTOS == 1
+    #include "FreeRTOS.h"
+    #include "task.h"
+    #define DSHOT_TaskDelay(ms) vTaskDelay(pdMS_TO_TICKS(ms))
+#endif
 
 
 
@@ -53,7 +63,9 @@ class DShot {
         DShot(TIM_HandleTypeDef *htim, uint32_t channel, DShotType type);
 
         bool begin();
+
         void send(uint16_t throttle);
+        void disarm();
 
     private:
 
@@ -61,6 +73,8 @@ class DShot {
 
         void _prepareDMABuffer(uint16_t value);
         uint16_t _preparePacket(uint16_t value);
+
+        void _delay(uint32_t ms);
 
         static void _dmaTC_Callback(DMA_HandleTypeDef *hdma);
 
