@@ -37,7 +37,7 @@ DShot is a digital protocol for communicating with ESCs, offering advantages ove
 
 ### Bit Encoding
 
-![image](https://user-images.githubusercontent.com/48342925/105717632-b780ba80-5f63-11eb-9508-54b4be15900d.png)
+![image](/example-images/105717632-b780ba80-5f63-11eb-9508-b54be4bd544d.png)
 
 | | Bit 0 | Bit 1 |
 |:---:|:---:|:---:|

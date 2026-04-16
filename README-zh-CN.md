@@ -37,7 +37,7 @@ DShot 是一种用于与电调通信的数字协议，相比传统 PWM 具有以
 
 ### 位编码
 
-![image](https://user-images.githubusercontent.com/48342925/105717632-b780ba80-5f63-11eb-9508-54b4be15900d.png)
+![image](/example-images/105717632-b780ba80-5f63-11eb-9508-b54be4bd544d.png)
 
 | | 位 0 | 位 1 |
 |:---:|:---:|:---:|
